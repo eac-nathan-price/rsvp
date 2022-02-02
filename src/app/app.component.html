@@ -1,3 +1,24 @@
-<div fxLayout fxLayoutAlign="center center">
-  <div>test</div>
+<div class="pattern"></div>
+<div class="shadow anim" [ngClass]="{'hide':timeline.done}"></div>
+<div class="circle" [ngClass]="{'hide':timeline.scrollDate>timeline.end}"></div>
+<img [src]="timeline.src" class="photo" [width]="timeline.width" [height]="timeline.height" *ngIf="!timeline.done">
+
+<div fxLayout="column" fxLayoutAlign="start end" class="timeline">
+  <div *ngFor="let month of timeline.months; let i = index;" fxLayout="column" fxLayoutAlign="start end">
+    <div class="tick" [ngClass]="{'big':month.bold, 'small':!month.bold}"></div>
+    <div *ngIf="month.bold" class="year">{{month.date.getFullYear()}}</div>
+    <div class="spacer"></div>
+  </div>
+  <div class="spacer point"></div>
+</div>
+<div>&nbsp;</div>
+
+<div fxLayout="column" fxLayoutAlign="start center" class="rsvp-col" *ngIf="timeline.done">
+  <div class="rsvp" style="width: 640px;" fxLayout="column" fxLayoutAlign="start center">
+    <h1>You are invited to attend</h1>
+    <h1>Our wedding / housewarming</h1>
+    <h1>April 23, 2022</h1>
+    <h1>5:00 PM</h1>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeO1wiMoaR3a_PGlHVhOZDkSCuwrKHpLtEOwYmMslW1-Q3BbA/viewform?embedded=true" width="640" height="1028" frameborder="0" marginheight="0" marginwidth="0" style="height: 100vh; margin-top: 25vh;">Loading…</iframe>
+  </div>
 </div>

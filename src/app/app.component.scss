@@ -1,0 +1,112 @@
+$line-color: white;
+
+div {
+  position: relative;
+  z-index: 100;
+}
+
+.spacer {
+  background-color: $line-color;
+  height: 42px;
+  width: 4px;
+
+  &.point {
+    position: absolute;
+    bottom: -5px;
+    right: 15px;
+    transform: rotate(-45deg);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+  }
+}
+
+.timeline {
+  margin: 50vh 0vw 100vh;
+}
+
+.tick {
+  background-color: $line-color;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  height: 4px;
+
+  &.small {
+    width: 25px;
+  }
+  &.big {
+    width: 50px;
+  }
+}
+
+.circle {
+  border: 4px solid $line-color;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  position: fixed;
+  right: -10px;
+  top: calc(50% - 10px);
+}
+
+.year {
+  position: absolute;
+  text-align: right;
+  top: -10px;
+  right: 60px;
+  font-size: 30px;
+  font-family: 'Brush Script MT', cursive;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  object-fit: contain;
+  top: 0px;
+  z-index: 75;
+}
+
+.pattern {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  z-index: 20;
+  background-image: url('../assets/background.png');
+}
+
+.shadow {
+  width: 50%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  z-index: 40;
+  background-image: linear-gradient(to right, #00000000, #000000ff);
+  visibility: visible;
+  opacity: 1;
+  &.anim {
+    transition: opacity 2s linear;
+  }
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;
+  &.anim {
+    transition: visibility 0s 2s, opacity 2s linear;
+  }
+}
+
+.rsvp {
+  background-color: #9b7ffc; /*#d1c4e9;*/
+  box-shadow: 0px 0px 50px 50px #9b7ffc;
+  z-index: 30;
+  top: -150vh;
+  padding-top: 100vh;
+  position: absolute;
+}
+
+.rsvp-col {
+  z-index: 30;
+}
