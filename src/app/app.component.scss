@@ -1,5 +1,10 @@
 $line-color: white;
 
+h1 {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 300%;
+}
+
 div {
   position: relative;
   z-index: 100;
@@ -58,11 +63,12 @@ div {
 }
 
 .photo {
-  width: 100%;
+  width: 100%; /*calc(100% - 300px);*/
   height: 100%;
   position: fixed;
   object-fit: contain;
   top: 0px;
+  /*left: 150px;*/
   z-index: 75;
 }
 
@@ -88,6 +94,15 @@ div {
   &.anim {
     transition: opacity 2s linear;
   }
+}
+
+.corner {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  z-index: 40;
+  max-height: 100%;
+  max-width: 75%;
 }
 
 .hide {

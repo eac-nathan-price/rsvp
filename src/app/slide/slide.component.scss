@@ -1,0 +1,22 @@
+/*.slide {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+
+  &.caption {
+    z-index: 100;
+    padding: 3vh;
+  }
+  &.picture {
+    z-index: 80;
+    object-fit: contain;
+  }
+}*/
+
+.picture {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

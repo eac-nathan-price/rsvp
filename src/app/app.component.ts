@@ -1,4 +1,12 @@
 import { Component, HostListener } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { EMPTY, forkJoin, Observable, throwError } from 'rxjs';
+import { catchError, filter, map, mergeMap, retry, tap } from 'rxjs/operators';
+
+type TParam = {
+  key?:string
+}
 
 type TMonth = {
   date:Date,
@@ -116,10 +124,53 @@ export class AppComponent {
 
     new Img('2015-01-ucsc.jpg', new Date(2022, 3, 23), 1080, 1920)
   ];
-  timeline = new Timeline(this.album, '../assets/', 46);
+  timeline = new Timeline(this.album, document.baseURI+'assets/', 46);
 
-  constructor() {
+  api = '';
+  doc = '';
+  key = '';
+  data$:Observable<any>;
+  endpoint$:Observable<string>;
+
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
     history.scrollRestoration = 'manual';
+
+    let api = 'aHR0cHM6Ly9maXJlc3RvcmUuZ29vZ2xlYXBpcy5jb20vdjEv';
+    this.api = Buffer.from(api, 'base64').toString('binary');
+    let doc = 'cHJvamVjdHMvcnN2cC0xN2ZkMi9kYXRhYmFzZXMvKGRlZmF1bHQpL2RvY3VtZW50cy9yZXNwb25zZXMv';
+    this.doc = Buffer.from(doc, 'base64').toString('binary');
+
+    this.endpoint$ = this.route.queryParams
+      .pipe(
+        filter((params:any) => params.key),
+        map((params:TParam) => this.doc + params.key),
+        tap((endpoint:any) => console.log(endpoint))
+      );
+    
+    this.data$ = this.endpoint$
+      .pipe(
+        mergeMap((endpoint:string) => http.get(this.api + endpoint)),
+        catchError((err, caught) => {
+          console.log(err);
+          return EMPTY;
+        }),
+        filter((response:any) => response.name),
+        map((data:any) => {
+          console.log(data);
+          let viewed = parseInt(data.fields._viewed.integerValue);
+          data.fields._viewed.integerValue = (++viewed).toString();
+          return data;
+        })
+      );
+    
+    let view$ = this.data$
+      .pipe(
+        mergeMap((data:any) => http.patch(this.api + data.name, data))
+      )
+      .subscribe((response:any) => {
+        console.log(response);
+        view$.unsubscribe();
+      });
   }
 
   @HostListener("window:scroll", [])

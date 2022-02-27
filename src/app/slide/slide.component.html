@@ -1,0 +1,6 @@
+<div *ngIf="file">
+  <img [src]="path + file" class="picture slide">
+</div>
+<div fxLayout="column" [fxLayoutAlign]="alignment" class="caption slide" [ngStyle]="{'color':color}">
+  <ng-content></ng-content>
+</div>
