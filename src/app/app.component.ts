@@ -129,6 +129,7 @@ export class AppComponent {
               return {name:entry[0], attending:entry[1] as TBooleanValue};
             });
           this.nodata$.next(false);
+          document.title = 'Nathan & Winnie | RSVP'
           return data;
         })
       );
