@@ -34,7 +34,7 @@
     <p style="font-size: 20px;">All guests vaccinated</p>
     <br />
     <div fxLayout="row wrap" fxLayoutAlign="space-between center" *ngFor="let person of people;">
-      <div>Will <span style="text-decoration: underline;">{{person.name}}</span> be attending?</div>
+      <div>Will <span style="text-decoration: underline;">{{person.name}}</span> attend?</div>
       <mat-radio-group [(ngModel)]="person.attending.booleanValue">
         <mat-radio-button [value]=false>No</mat-radio-button>
         <mat-radio-button [value]=true>Yes</mat-radio-button>
