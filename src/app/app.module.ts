@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxUsefulSwiperModule  } from 'ngx-useful-swiper';
 // Modules
 import { AppRoutingModule, MaterialModule } from 'src/app';
 // Components
@@ -18,6 +19,7 @@ import { SlideComponent } from './slide/slide.component';
     BrowserModule/* First */,
     HttpClientModule,
     MaterialModule,
+    NgxUsefulSwiperModule ,
     AppRoutingModule/* Last */
   ],
   providers: [],
